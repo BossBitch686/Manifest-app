@@ -65,8 +65,7 @@ async function generate(){
     const parsed=JSON.parse(match[0]);
     let html=`<div class="card"><h2>✦ Your Story — As It Has Already Happened</h2><div class="story">${parsed.story.replace(/\n/g,'<br><br>')}</div></div>`;
     html+=`<div class="card"><h2>Your 7-Day Affirmations</h2>${parsed.affirmations.map(a=>`<div class="aff"><span class="day">${a.day}</span><span class="aff-text">${a.text}</span></div>`).join('')}</div>`;
-    if(parsed.bestDays)html+=`<div class="card"><h2>✦ Pro · Best Days to Manifest</h2>${parsed.bestDays.map(d=>`<div style="margin-bottom:16px"><strong style="color:#c4a0ff">${d.date}</strong> · ${d.dayName} · Power ${d.strength}/5<br><span style="font-size:.85rem;color:#c8b89a">${d.reason}</span></div>`).join('')}</div>`;
-    out.innerHTML=html;
+    if(parsed.bestDays)html+=`<div class="card"><h2>✦ Pro · Best Days to Manifest</h2>${parsed.bestDays.map(d=>`<div style="margin-bottom:16px"><strong style="color:#c4a0ff">${d.date}</strong> · ${d.dayName} · Power ${d.strength}/5<br><span style="font-size:.85rem;color:#c8b89a">${d.reason}</span></div>`).join('')}</out.innerHTML=html+'<div style="margin-top:16px;display:flex;gap:10px;align-items:center"><button onclick="window.speechSynthesis.speak(Object.assign(new SpeechSynthesisUtterance(document.querySelector(\'.story\').innerText),{rate:0.88}))" style="padding:12px 20px;background:linear-gradient(135deg,#a8772a,#c9a84c);border:none;border-radius:10px;color:#1a1000;font-weight:700;cursor:pointer;width:auto">▶ Hear My Story</button></div>';
   }catch(e){out.innerHTML=`<p class="error">Something shifted — ${e.message}. Please try again.</p>`;}
   btn.disabled=false; btn.textContent='✦ Reveal My Story';
 }
