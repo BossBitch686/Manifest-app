@@ -20,7 +20,11 @@ app.post("/generate", async (req, res) => {
       }),
     });
     const data = await response.json();
-    res.json(data);
+if (!response.ok) {
+  return res.status(500).json({ error: data.error?.message || JSON.stringify(data) });
+}
+res.json(data);
+  
   } catch (err) {
     res.status(500).json({ error: { message: err.message } });
   }
