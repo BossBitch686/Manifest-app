@@ -1,399 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Manifest Your Reality</title>
-  <meta name="description" content="Turn your intentions into reality. AI-written manifestation stories and daily affirmations." />
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap');
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{background:#08071a;color:#f5ecd7;font-family:'Jost',sans-serif;min-height:100vh;overflow-x:hidden}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    @keyframes cspin{to{transform:rotate(-360deg)}}
-    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-    @keyframes slideUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes slideIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
-    @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-    .fade-in{animation:fadeIn .6s ease both}
-    textarea,input[type=date]{width:100%;background:rgba(8,7,26,.8);border:1px solid rgba(201,168,76,.25);border-radius:10px;color:#f5ecd7;font-family:'Jost',sans-serif;font-size:.97rem;font-weight:300;padding:15px 19px;outline:none;transition:border-color .3s,box-shadow .3s;resize:none}
-    textarea{min-height:110px}
-    textarea:focus,input:focus{border-color:rgba(201,168,76,.55);box-shadow:0 0 0 3px rgba(201,168,76,.13)}
-    textarea::placeholder,input::placeholder{color:rgba(197,184,154,.28)}
-    input[type=date]::-webkit-calendar-picker-indicator{filter:invert(.6) sepia(1) hue-rotate(10deg);cursor:pointer}
-    .overlay{position:fixed;inset:0;z-index:200;background:rgba(8,7,26,.88);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s ease}
-    .modal{background:linear-gradient(135deg,#181740,#131230);border:1px solid rgba(201,168,76,.28);border-radius:18px;padding:36px;max-width:480px;width:100%;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.6);animation:slideUp .28s ease}
-    .modal-pro{border-color:rgba(155,109,255,.38)}
-    .toggle{width:44px;height:24px;background:rgba(255,255,255,.1);border-radius:12px;position:relative;cursor:pointer;border:none;flex-shrink:0;transition:background .3s}
-    .toggle.on{background:#9b6dff}
-    .toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;background:white;border-radius:50%;transition:transform .3s;box-shadow:0 1px 4px rgba(0,0,0,.3)}
-    .toggle.on::after{transform:translateX(20px)}
-  </style>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Manifest Your Reality</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#08071a;color:#f5ecd7;font-family:Georgia,serif;min-height:100vh;padding:40px 24px;max-width:680px;margin:0 auto}
+h1{font-size:2.4rem;font-weight:300;font-style:italic;color:#c9a84c;text-align:center;margin-bottom:8px}
+p.sub{text-align:center;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:#c8b89a;margin-bottom:40px}
+textarea,input[type=date]{width:100%;background:rgba(8,7,26,.8);border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#f5ecd7;font-family:Georgia,serif;font-size:1rem;padding:14px 18px;outline:none;resize:none;margin-bottom:14px}
+textarea{min-height:100px}
+button{width:100%;padding:15px;background:linear-gradient(135deg,#a8772a,#c9a84c 50%,#e8d08a);border:none;border-radius:10px;color:#1a1000;font-size:.85rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;margin-bottom:14px}
+button:disabled{opacity:.5;cursor:not-allowed}
+.card{background:rgba(24,23,64,.8);border:1px solid rgba(201,168,76,.2);border-radius:14px;padding:28px;margin-top:24px}
+.card h2{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:#c9a84c;margin-bottom:18px}
+.story{font-style:italic;font-size:1.1rem;line-height:1.85;color:#f5ecd7}
+.aff{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid rgba(201,168,76,.1)}
+.day{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#c9a84c;min-width:58px;padding-top:3px}
+.aff-text{font-style:italic;font-size:1rem;line-height:1.5}
+.spinner{text-align:center;color:#c9a84c;font-size:1.5rem;margin:30px;animation:spin 1.5s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error{color:#ff9999;text-align:center;padding:20px}
+.pro-toggle{display:flex;align-items:center;justify-content:space-between;background:rgba(155,109,255,.1);border:1px solid rgba(155,109,255,.25);border-radius:10px;padding:14px 18px;margin-bottom:14px}
+.toggle{width:44px;height:24px;background:rgba(255,255,255,.15);border-radius:12px;position:relative;cursor:pointer;border:none;transition:background .3s}
+.toggle.on{background:#9b6dff}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;background:white;border-radius:50%;transition:transform .3s}
+.toggle.on::after{transform:translateX(20px)}
+</style>
 </head>
 <body>
-  <div id="root"></div>
-  <script type="text/babel">
-    const { useState, useEffect, useRef } = React;
-
-    const STRIPE_LINK = "https://buy.stripe.com/dRm00d7wScCy3PK8XFak001";
-    const APP_URL = "https://vocal-liger-c16c67.netlify.app";
-
-    const gold="#c9a84c",proColor="#9b6dff",proLight="#c4a0ff",cream="#f5ecd7",creamDim="#c8b89a",creamDimmer="#8a7a60";
-    const card={background:"linear-gradient(135deg,rgba(30,29,78,.92),rgba(20,19,60,.95))",border:"1px solid rgba(201,168,76,.2)",borderRadius:14,padding:"32px",marginBottom:20,position:"relative",overflow:"hidden"};
-    const btnGold={display:"block",width:"100%",padding:"16px",border:"none",borderRadius:10,background:"linear-gradient(135deg,#a8772a,#c9a84c 45%,#e8d08a 70%,#c9a84c)",backgroundSize:"200% auto",color:"#1a1000",fontFamily:"'Jost',sans-serif",fontSize:".82rem",fontWeight:600,letterSpacing:".2em",textTransform:"uppercase",cursor:"pointer",boxShadow:"0 4px 22px rgba(201,168,76,.28)",transition:"all .3s"};
-    const btnPro={display:"block",width:"100%",padding:"16px",border:"none",borderRadius:10,background:"linear-gradient(135deg,#5b2d9e,#9b6dff 50%,#c4a0ff)",backgroundSize:"200% auto",color:"white",fontFamily:"'Jost',sans-serif",fontSize:".82rem",fontWeight:600,letterSpacing:".2em",textTransform:"uppercase",cursor:"pointer",boxShadow:"0 4px 22px rgba(155,109,255,.32)",transition:"all .3s"};
-    const btnGhost={background:"none",border:"1px solid rgba(201,168,76,.3)",color:gold,padding:"9px 20px",borderRadius:22,fontFamily:"'Jost',sans-serif",fontSize:".74rem",letterSpacing:".15em",textTransform:"uppercase",cursor:"pointer",display:"inline-flex",alignItems:"center",gap:7,transition:"all .2s"};
-    const lbl={fontSize:".67rem",letterSpacing:".28em",textTransform:"uppercase",color:gold,marginBottom:18,display:"flex",alignItems:"center",gap:10};
-    const lblLine={flex:1,height:1,background:"rgba(201,168,76,.22)"};
-
-    function Stars(){
-      return <div style={{position:"fixed",inset:0,zIndex:0,pointerEvents:"none",backgroundImage:["radial-gradient(1px 1px at 8% 12%,rgba(255,255,255,.7) 0%,transparent 100%)","radial-gradient(1px 1px at 22% 38%,rgba(255,255,255,.45) 0%,transparent 100%)","radial-gradient(1.5px 1.5px at 48% 7%,rgba(255,255,255,.75) 0%,transparent 100%)","radial-gradient(1px 1px at 68% 22%,rgba(255,255,255,.5) 0%,transparent 100%)","radial-gradient(1px 1px at 83% 58%,rgba(255,255,255,.4) 0%,transparent 100%)","radial-gradient(2px 2px at 4% 48%,rgba(201,168,76,.6) 0%,transparent 100%)","radial-gradient(1.5px 1.5px at 74% 78%,rgba(201,168,76,.4) 0%,transparent 100%)","radial-gradient(1px 1px at 55% 33%,rgba(155,109,255,.35) 0%,transparent 100%)"].join(",")}} />;
-    }
-
-    function ShareModal({result, onClose}){
-      const [copied, setCopied] = useState("");
-      const snippet = result?.story?.split(". ").slice(0,2).join(". ")+".";
-      const tweet = `https://twitter.com/intent/tweet?text=${encodeURIComponent(`✨ My manifestation has arrived...\n\n"${snippet.slice(0,180)}"\n\nManifest yours → ${APP_URL}`)}`;
-      const copy = (text, lbl) => { navigator.clipboard.writeText(text); setCopied(lbl); setTimeout(()=>setCopied(""),2000); };
-      const fullText = `✨ MY MANIFESTATION STORY\n\n${result?.story||""}\n\n─────\nDAILY AFFIRMATIONS\n\n${result?.affirmations?.map(a=>`${a.day}: ${a.text}`).join("\n")||""}`;
-      const todayAff = (()=>{ const day=new Date().toLocaleDateString("en-US",{weekday:"long"}); return result?.affirmations?.find(a=>a.day===day)||result?.affirmations?.[0]; })();
-      const opts = [
-        {icon:"𝕏",title:"Share on X / Twitter",sub:"Post a teaser of your story",action:()=>window.open(tweet,"_blank")},
-        {icon:"✦",title:"Copy full story + affirmations",sub:"Paste in notes, journal, or Instagram",action:()=>copy(fullText,"story")},
-        {icon:"☽",title:"Copy today's affirmation",sub:"Perfect for an Instagram caption",action:()=>copy(`"${todayAff?.text}"\n\n${APP_URL}`,"aff")},
-      ];
-      return (
-        <div className="overlay" onClick={onClose}>
-          <div className="modal" onClick={e=>e.stopPropagation()}>
-            <button onClick={onClose} style={{position:"absolute",top:16,right:18,background:"none",border:"none",color:creamDim,fontSize:"1.5rem",cursor:"pointer",lineHeight:1}}>×</button>
-            <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.75rem",fontWeight:300,fontStyle:"italic",color:cream,marginBottom:6}}>Share Your Story</div>
-            <div style={{fontSize:".83rem",color:creamDim,lineHeight:1.6,marginBottom:24}}>Inspire others — or keep it as your sacred daily reminder.</div>
-            {opts.map((o,i)=>(
-              <div key={i} onClick={o.action} style={{display:"flex",alignItems:"center",gap:14,padding:"15px 17px",background:"rgba(8,7,26,.6)",border:"1px solid rgba(201,168,76,.18)",borderRadius:10,cursor:"pointer",marginBottom:10}}>
-                <div style={{fontSize:"1.3rem",width:28,textAlign:"center",color:gold}}>{o.icon}</div>
-                <div><div style={{fontSize:".88rem",color:cream,marginBottom:2}}>{o.title}</div><div style={{fontSize:".76rem",color:creamDim}}>{o.sub}</div></div>
-              </div>
-            ))}
-            {copied && <div style={{textAlign:"center",color:gold,fontSize:".8rem",letterSpacing:".1em",marginTop:8}}>✓ Copied!</div>}
-          </div>
-        </div>
-      );
-    }
-
-    function UpgradeModal({onClose, onUnlock}){
-      const features=[["✦","Best days to manifest — powered by numerology"],["☽","Personal birth energy alignment"],["◈","Priority AI generation"],["⊕","PDF export (coming soon)"]];
-      return (
-        <div className="overlay" onClick={onClose}>
-          <div className="modal modal-pro" onClick={e=>e.stopPropagation()}>
-            <button onClick={onClose} style={{position:"absolute",top:16,right:18,background:"none",border:"none",color:creamDim,fontSize:"1.5rem",cursor:"pointer",lineHeight:1}}>×</button>
-            <div style={{textAlign:"center",marginBottom:4}}><span style={{fontSize:"1.9rem",color:proLight}}>✦</span></div>
-            <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.75rem",fontWeight:300,fontStyle:"italic",color:cream,textAlign:"center",marginBottom:4}}>Unlock Pro</div>
-            <div style={{fontSize:".82rem",color:creamDim,textAlign:"center",marginBottom:24}}>$6.99 / month · Cancel anytime</div>
-            {features.map(([icon,text],i)=>(
-              <div key={i} style={{display:"flex",alignItems:"center",gap:12,marginBottom:12}}>
-                <span style={{color:proLight,width:22,textAlign:"center"}}>{icon}</span>
-                <span style={{fontSize:".88rem",color:creamDim}}>{text}</span>
-              </div>
-            ))}
-            <div style={{marginTop:24}}>
-              <button style={btnPro} onClick={()=>window.open(STRIPE_LINK,"_blank")}>✦ Continue to Checkout</button>
-              <div style={{textAlign:"center",fontSize:".74rem",color:creamDimmer,letterSpacing:".15em",textTransform:"uppercase",margin:"14px 0"}}>— already paid? —</div>
-              <button onClick={onUnlock} style={{...btnGhost,width:"100%",justifyContent:"center"}}>Unlock Pro Now</button>
-              <p style={{fontSize:".76rem",color:creamDimmer,textAlign:"center",marginTop:10}}>Secure checkout via Stripe.</p>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    function Landing({onGoToApp}){
-      const steps=[["01","Set your intention","Describe what you want to manifest — career, love, abundance, health. Specific intentions create powerful stories."],["02","Your story arrives","We write a vivid, emotional story in past tense — as if your desire fully manifested. Read it and feel it as real."],["03","Affirm it daily","7 personalized affirmations — one per day — crafted around your exact desire. Not generic. Yours."]];
-      const testimonials=[["Sarah M.","Got the promotion 3 weeks after reading my story every morning. The affirmations changed how I walked into that room.","★★★★★"],["Jordan K.","The story made me cry. That emotional connection is what makes manifestation work — and this nails it.","★★★★★"],["Priya S.","The Pro best-days feature is wild. I launched my business on the exact day it suggested and closed 4 clients that week.","★★★★★"]];
-      return (
-        <div className="fade-in">
-          <div style={{textAlign:"center",padding:"90px 24px 70px",maxWidth:700,margin:"0 auto"}}>
-            <div style={{fontSize:"2.1rem",marginBottom:18,color:gold,animation:"float 4s ease-in-out infinite"}}>✦</div>
-            <h1 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"clamp(2.8rem,7vw,4rem)",fontWeight:300,lineHeight:1.06,letterSpacing:".05em"}}>Your dream life<br/><em style={{color:gold}}>has already happened.</em></h1>
-            <p style={{fontSize:".82rem",letterSpacing:".22em",textTransform:"uppercase",color:creamDim,marginTop:16}}>Manifestation · Affirmations · Alignment</p>
-            <p style={{fontSize:"1.05rem",color:creamDim,lineHeight:1.72,margin:"20px auto 0",maxWidth:480}}>Tell us what you want to call in. We write your story as if it's already yours — then give you affirmations to claim it every day.</p>
-            <div style={{marginTop:40,display:"flex",flexDirection:"column",alignItems:"center",gap:12}}>
-              <button style={{...btnGold,width:"auto",padding:"16px 52px"}} onClick={onGoToApp}>✦ Begin Manifesting — It's Free</button>
-              <span style={{fontSize:".74rem",color:creamDimmer,letterSpacing:".1em"}}>No account needed · Instant results</span>
-            </div>
-          </div>
-          <div style={{borderTop:"1px solid rgba(201,168,76,.1)",padding:"70px 24px"}}>
-            <div style={{maxWidth:800,margin:"0 auto"}}>
-              <div style={{textAlign:"center",fontSize:".68rem",letterSpacing:".3em",textTransform:"uppercase",color:gold,marginBottom:40}}>How it works</div>
-              <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",gap:20}}>
-                {steps.map(([n,title,desc])=>(
-                  <div key={n} style={{padding:"30px 24px",background:"rgba(24,23,64,.7)",border:"1px solid rgba(201,168,76,.13)",borderRadius:14,textAlign:"center"}}>
-                    <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"2.8rem",fontWeight:300,color:"rgba(201,168,76,.22)",lineHeight:1,marginBottom:12}}>{n}</div>
-                    <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.18rem",fontStyle:"italic",color:cream,marginBottom:10}}>{title}</div>
-                    <div style={{fontSize:".84rem",color:creamDim,lineHeight:1.65}}>{desc}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div style={{borderTop:"1px solid rgba(201,168,76,.1)",padding:"70px 24px"}}>
-            <div style={{maxWidth:800,margin:"0 auto"}}>
-              <div style={{textAlign:"center",fontSize:".68rem",letterSpacing:".3em",textTransform:"uppercase",color:gold,marginBottom:40}}>What people are saying</div>
-              <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:18}}>
-                {testimonials.map(([name,text,stars],i)=>(
-                  <div key={i} style={{padding:"26px 24px",background:"rgba(20,19,58,.7)",border:"1px solid rgba(201,168,76,.12)",borderRadius:14}}>
-                    <div style={{color:gold,fontSize:".7rem",letterSpacing:2,marginBottom:8}}>{stars}</div>
-                    <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1rem",fontStyle:"italic",lineHeight:1.65,color:cream,marginBottom:12}}>"{text}"</div>
-                    <div style={{fontSize:".7rem",letterSpacing:".18em",textTransform:"uppercase",color:gold}}>{name}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div style={{borderTop:"1px solid rgba(201,168,76,.1)",padding:"70px 24px"}}>
-            <div style={{maxWidth:680,margin:"0 auto"}}>
-              <div style={{textAlign:"center",fontSize:".68rem",letterSpacing:".3em",textTransform:"uppercase",color:gold,marginBottom:40}}>Simple pricing</div>
-              <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:18}}>
-                <div style={{padding:"30px 26px",background:"rgba(24,23,64,.7)",border:"1px solid rgba(201,168,76,.2)",borderRadius:14}}>
-                  <div style={{fontSize:".68rem",letterSpacing:".25em",textTransform:"uppercase",color:creamDim,marginBottom:8}}>Free forever</div>
-                  <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"2.6rem",fontWeight:300,color:cream,lineHeight:1,marginBottom:4}}>$0</div>
-                  <div style={{fontSize:".76rem",color:creamDimmer,marginBottom:22}}>No credit card needed</div>
-                  {["AI manifestation story","7 daily affirmations","Unlimited manifestations","Copy & share your story"].map((f,i)=>(
-                    <div key={i} style={{display:"flex",gap:10,marginBottom:10,fontSize:".87rem",color:creamDim,alignItems:"flex-start"}}><span style={{color:gold,flexShrink:0}}>✦</span>{f}</div>
-                  ))}
-                  <div style={{marginTop:24}}><button style={btnGold} onClick={onGoToApp}>Get Started Free</button></div>
-                </div>
-                <div style={{padding:"30px 26px",background:"linear-gradient(135deg,rgba(91,45,158,.35),rgba(40,20,90,.6))",border:"1px solid rgba(155,109,255,.38)",borderRadius:14,position:"relative",overflow:"hidden"}}>
-                  <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:"linear-gradient(to right,transparent,#c4a0ff,transparent)"}} />
-                  <div style={{fontSize:".68rem",letterSpacing:".25em",textTransform:"uppercase",color:creamDim,marginBottom:8}}>Pro</div>
-                  <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"2.6rem",fontWeight:300,color:cream,lineHeight:1,marginBottom:4}}>$6.99 <span style={{fontSize:"1rem",color:creamDim}}>/mo</span></div>
-                  <div style={{fontSize:".76rem",color:creamDimmer,marginBottom:22}}>Cancel anytime</div>
-                  {["Everything in Free","Best days to manifest (numerology)","Birth energy alignment","Priority AI generation"].map((f,i)=>(
-                    <div key={i} style={{display:"flex",gap:10,marginBottom:10,fontSize:".87rem",color:creamDim,alignItems:"flex-start"}}><span style={{color:proLight,flexShrink:0}}>✦</span>{f}</div>
-                  ))}
-                  <div style={{marginTop:24}}><button style={btnPro} onClick={()=>window.open(STRIPE_LINK,"_blank")}>Upgrade to Pro</button></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div style={{borderTop:"1px solid rgba(201,168,76,.1)",padding:"70px 24px 40px",textAlign:"center"}}>
-            <h2 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"clamp(1.8rem,4vw,2.6rem)",fontWeight:300,fontStyle:"italic",lineHeight:1.2,marginBottom:28}}>Your reality is waiting<br/>for you to claim it.</h2>
-            <button style={{...btnGold,width:"auto",padding:"16px 52px",margin:"0 auto"}} onClick={onGoToApp}>✦ Start Manifesting Now</button>
-          </div>
-          <div style={{textAlign:"center",padding:"32px 24px",borderTop:"1px solid rgba(201,168,76,.08)",fontSize:".76rem",color:creamDimmer,letterSpacing:".1em"}}>© 2026 Manifest Your Reality</div>
-        </div>
-      );
-    }
-
-    function AppScreen({isPro, setIsPro, onShowUpgrade}){
-      const [desire, setDesire] = useState("");
-      const [birthday, setBirthday] = useState("");
-      const [loading, setLoading] = useState(false);
-      const [loadingMsg, setLoadingMsg] = useState("");
-      const [result, setResult] = useState(null);
-      const [showShare, setShowShare] = useState(false);
-      const resultRef = useRef(null);
-      const msgs = ["Reading your energy...","Weaving your story...","Aligning the stars...","Channeling your intention...","Almost ready..."];
-
-      useEffect(()=>{
-        if(!loading) return;
-        let i=0; setLoadingMsg(msgs[0]);
-        const t = setInterval(()=>{ i=(i+1)%msgs.length; setLoadingMsg(msgs[i]); }, 2200);
-        return ()=>clearInterval(t);
-      }, [loading]);
-
-      useEffect(()=>{
-        if(result) setTimeout(()=>resultRef.current?.scrollIntoView({behavior:"smooth",block:"start"}), 150);
-      }, [result]);
-
-      const generate = async () => {
-        if(!desire.trim()) return;
-        setLoading(true); setResult(null);
-        const proChunk = isPro && birthday
-          ? `, "bestDays": array of 5 objects each with "date" (upcoming date within 30 days e.g. "June 3, 2026"), "dayName", "reason" (warm 1-2 sentences about numerology for birthday ${birthday}), "strength" (1-5 number)`
-          : "";
-        const prompt = `You are a soulful manifestation guide. The person wants to manifest: "${desire}"\n\nReturn ONLY a raw JSON object — no markdown, no backticks, no explanation. Just JSON.\n\nThe JSON must have:\n- "story": string — 2 paragraphs in past tense second person as if this already happened, vivid and emotional\n- "affirmations": array of 7 objects with "day" (Monday-Sunday) and "text" (personal affirmation for this desire)${proChunk}`;
-
-        try {
-          const res = await fetch("/generate", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ prompt }),
-          });
-          if(!res.ok) { const err = await res.json().catch(()=>({})); throw new Error(err?.error?.message || `HTTP ${res.status}`); }
-          const data = await res.json();
-          if(data.error) throw new Error(data.error.message);
-          const raw = data.content.map(b=>b.text||"").join("").trim();
-          const match = raw.match(/\{[\s\S]*\}/);
-          if(!match) throw new Error("No JSON found");
-          const parsed = JSON.parse(match[0]);
-          if(!parsed.story || !parsed.affirmations) throw new Error("Incomplete response");
-          setResult(parsed);
-        } catch(e) {
-          console.error(e);
-          setResult({error:true, msg:e.message});
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      const paragraphs = result?.story?.split(/\n+/).filter(Boolean) || [];
-
-      return (
-        <div style={{maxWidth:780,margin:"0 auto",padding:"0 22px 90px"}}>
-          <div style={{textAlign:"center",padding:"56px 0 40px"}}>
-            <div style={{fontSize:"1.9rem",marginBottom:14,color:gold,animation:"float 4s ease-in-out infinite"}}>✦</div>
-            <h1 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"clamp(2rem,5vw,2.9rem)",fontWeight:300,letterSpacing:".06em"}}>Manifest Your <em style={{color:gold}}>Reality</em></h1>
-            <p style={{marginTop:12,fontSize:".8rem",letterSpacing:".22em",textTransform:"uppercase",color:creamDim}}>Intention · Story · Alignment</p>
-          </div>
-
-          {!result ? (
-            <>
-              <div style={card}>
-                <div style={lbl}><span>What do you wish to call in?</span><span style={lblLine}/></div>
-                <textarea value={desire} onChange={e=>setDesire(e.target.value)} placeholder="Be specific — a new career, a soulmate, financial freedom, a healed body..." rows={4}/>
-                <p style={{fontSize:".77rem",color:creamDimmer,marginTop:9}}>The more specific your intention, the more powerful your story.</p>
-              </div>
-              <div style={card}>
-                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"12px 16px",background:"rgba(8,7,26,.5)",border:"1px solid rgba(155,109,255,.2)",borderRadius:10,marginBottom:isPro?18:0}}>
-                  <span style={{fontSize:".9rem",color:creamDim,display:"flex",alignItems:"center",gap:10}}>
-                    Pro Features
-                    <span style={{background:"rgba(155,109,255,.15)",border:"1px solid rgba(155,109,255,.35)",borderRadius:20,padding:"3px 10px",fontSize:".65rem",letterSpacing:".2em",textTransform:"uppercase",color:proLight}}>✦ Pro</span>
-                  </span>
-                  <button className={`toggle${isPro?" on":""}`} onClick={()=>isPro?setIsPro(false):onShowUpgrade()}/>
-                </div>
-                {isPro && (
-                  <>
-                    <div style={{...lbl,marginBottom:12}}><span>Your birthday</span><span style={lblLine}/></div>
-                    <input type="date" value={birthday} onChange={e=>setBirthday(e.target.value)}/>
-                    <p style={{fontSize:".77rem",color:creamDimmer,marginTop:9}}>Used to calculate your personal numerology & best manifestation days.</p>
-                  </>
-                )}
-              </div>
-              <button style={{...btnGold,opacity:(loading||!desire.trim()||(isPro&&!birthday))?.45:1,cursor:(loading||!desire.trim()||(isPro&&!birthday))?"not-allowed":"pointer"}}
-                onClick={generate} disabled={loading||!desire.trim()||(isPro&&!birthday)}>
-                {loading ? "Manifesting..." : "✦ Reveal My Story"}
-              </button>
-              {loading && (
-                <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:18,padding:"48px 0"}}>
-                  <div style={{width:58,height:58,borderRadius:"50%",border:"2px solid transparent",borderTopColor:gold,borderRightColor:"rgba(201,168,76,.2)",animation:"spin 1.5s linear infinite",position:"relative"}}>
-                    <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",color:gold,animation:"cspin 1.5s linear infinite"}}>✦</div>
-                  </div>
-                  <div style={{fontSize:".82rem",letterSpacing:".17em",color:creamDim,animation:"pulse 2.2s ease-in-out infinite"}}>{loadingMsg}</div>
-                </div>
-              )}
-            </>
-          ) : result.error ? (
-            <div style={{...card,textAlign:"center"}}>
-              <p style={{color:creamDim,marginBottom:8}}>Something shifted — please try again.</p>
-              {result.msg && <p style={{fontSize:".75rem",color:creamDimmer,marginBottom:18,fontFamily:"monospace"}}>{result.msg}</p>}
-              <button onClick={()=>setResult(null)} style={{background:"none",border:"none",color:creamDimmer,cursor:"pointer",textDecoration:"underline",fontSize:".82rem"}}>Try again</button>
-            </div>
-          ) : (
-            <div ref={resultRef} className="fade-in">
-              <div style={card}>
-                <div style={lbl}><span>✦ Your Story — As It Has Already Happened</span><span style={lblLine}/></div>
-                <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.2rem",lineHeight:1.9,fontStyle:"italic",fontWeight:300}}>
-                  {paragraphs.map((p,i)=><p key={i} style={{marginBottom:i<paragraphs.length-1?"1.2em":0}}>{p}</p>)}
-                </div>
-                {result.affirmations && (
-                  <>
-                    <div style={{display:"flex",alignItems:"center",gap:14,margin:"26px 0"}}>
-                      <div style={{flex:1,height:1,background:"linear-gradient(to right,transparent,rgba(201,168,76,.3),transparent)"}}/>
-                      <div style={{color:gold,fontSize:".65rem"}}>◆</div>
-                      <div style={{flex:1,height:1,background:"linear-gradient(to right,transparent,rgba(201,168,76,.3),transparent)"}}/>
-                    </div>
-                    <div style={lbl}><span>Your 7-Day Affirmations</span><span style={lblLine}/></div>
-                    <div style={{display:"flex",flexDirection:"column",gap:11}}>
-                      {result.affirmations.map((a,i)=>(
-                        <div key={i} style={{display:"flex",alignItems:"flex-start",gap:14,padding:"12px 17px",background:"rgba(8,7,26,.5)",borderLeft:"2px solid rgba(122,97,48,.7)",borderRadius:"0 8px 8px 0",animation:"slideIn .4s ease both",animationDelay:`${i*.07}s`}}>
-                          <span style={{fontSize:".62rem",letterSpacing:".18em",textTransform:"uppercase",color:gold,minWidth:54,paddingTop:3}}>{a.day}</span>
-                          <span style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.04rem",lineHeight:1.55,fontStyle:"italic"}}>{a.text}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                )}
-                <div style={{display:"flex",gap:10,flexWrap:"wrap",marginTop:22}}>
-                  <button style={btnGhost} onClick={()=>setShowShare(true)}>⊕ Share Story</button>
-                  <button onClick={()=>setResult(null)} style={{background:"none",border:"none",color:creamDimmer,cursor:"pointer",textDecoration:"underline",fontSize:".8rem",letterSpacing:".08em"}}>↺ New manifestation</button>
-                </div>
-              </div>
-              {result.bestDays && (
-                <div style={card}>
-                  <div style={{...lbl,color:proLight}}><span>✦ Pro · Your Best Days to Manifest</span><span style={{...lblLine,background:"rgba(155,109,255,.22)"}}/></div>
-                  <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(190px,1fr))",gap:13}}>
-                    {result.bestDays.map((d,i)=>(
-                      <div key={i} style={{background:"linear-gradient(135deg,rgba(155,109,255,.12),rgba(91,45,158,.2))",border:"1px solid rgba(155,109,255,.25)",borderRadius:12,padding:17,animation:"fadeUp .5s ease both",animationDelay:`${i*.1}s`}}>
-                        <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.12rem",fontWeight:600,color:proLight,marginBottom:4}}>{d.date}</div>
-                        <div style={{fontSize:".65rem",letterSpacing:".17em",textTransform:"uppercase",color:"rgba(196,160,255,.55)",marginBottom:9}}>{d.dayName} · Power {d.strength}/5</div>
-                        <div style={{fontSize:".83rem",color:creamDim,lineHeight:1.55}}>{d.reason}</div>
-                        <div style={{display:"flex",gap:4,marginTop:10}}>
-                          {[1,2,3,4,5].map(n=><div key={n} style={{width:6,height:6,borderRadius:"50%",background:n<=d.strength?proColor:"rgba(155,109,255,.2)"}}/>)}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-              {!isPro && (
-                <div style={{...card,background:"linear-gradient(135deg,rgba(91,45,158,.22),rgba(40,20,90,.4))",border:"1px solid rgba(155,109,255,.3)",textAlign:"center"}}>
-                  <p style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.1rem",fontStyle:"italic",color:creamDim,lineHeight:1.65,marginBottom:22}}>Unlock your personal numerology — discover the exact days the universe is conspiring in your favor.</p>
-                  <button style={btnPro} onClick={onShowUpgrade}>✦ Upgrade to Pro — $6.99/mo</button>
-                </div>
-              )}
-            </div>
-          )}
-          {showShare && <ShareModal result={result} onClose={()=>setShowShare(false)}/>}
-        </div>
-      );
-    }
-
-    function App(){
-      const [view, setView] = useState("landing");
-      const [isPro, setIsPro] = useState(false);
-      const [showUpgrade, setShowUpgrade] = useState(false);
-
-      useEffect(()=>{
-        try {
-          const p = new URLSearchParams(window.location.search);
-          if(p.get("pro")==="unlocked"){ setIsPro(true); setView("app"); }
-        } catch(e){}
-      }, []);
-
-      const handleUnlock = () => { setIsPro(true); setShowUpgrade(false); };
-
-      return (
-        <>
-          <div style={{minHeight:"100vh",background:"radial-gradient(ellipse 80% 50% at 50% -5%,rgba(201,168,76,.1) 0%,transparent 55%), radial-gradient(ellipse 50% 40% at 85% 105%,rgba(60,30,130,.3) 0%,transparent 55%), #08071a"}}>
-            <Stars/>
-            <div style={{position:"relative",zIndex:1}}>
-              <nav style={{position:"sticky",top:0,zIndex:100,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"17px 28px",borderBottom:"1px solid rgba(201,168,76,.1)",background:"rgba(8,7,26,.88)",backdropFilter:"blur(14px)"}}>
-                <div onClick={()=>setView("landing")} style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.2rem",letterSpacing:".1em",cursor:"pointer",display:"flex",alignItems:"center",gap:7}}>
-                  <span style={{color:gold}}>✦</span> <span>Manifest</span>
-                </div>
-                <div style={{display:"flex",alignItems:"center",gap:12}}>
-                  {isPro && <span style={{background:"rgba(155,109,255,.15)",border:"1px solid rgba(155,109,255,.38)",borderRadius:20,padding:"4px 13px",fontSize:".67rem",letterSpacing:".2em",textTransform:"uppercase",color:proLight}}>✦ Pro</span>}
-                  {view==="landing"
-                    ? <button style={{...btnGold,width:"auto",padding:"10px 22px",fontSize:".77rem"}} onClick={()=>setView("app")}>Start Free</button>
-                    : <button onClick={()=>setView("landing")} style={{background:"none",border:"none",color:creamDim,fontFamily:"'Jost',sans-serif",fontSize:".8rem",letterSpacing:".12em",textTransform:"uppercase",cursor:"pointer"}}>Home</button>
-                  }
-                </div>
-              </nav>
-              {view==="landing" ? <Landing onGoToApp={()=>setView("app")}/> : <AppScreen isPro={isPro} setIsPro={setIsPro} onShowUpgrade={()=>setShowUpgrade(true)}/>}
-            </div>
-          </div>
-          {showUpgrade && <UpgradeModal onClose={()=>setShowUpgrade(false)} onUnlock={handleUnlock}/>}
-        </>
-      );
-    }
-
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App/>);
-  </script>
+<h1>✦ Manifest Your Reality</h1>
+<p class="sub">Intention · Story · Alignment</p>
+<textarea id="desire" placeholder="What do you want to manifest? Be specific — a new career, a soulmate, financial freedom..."></textarea>
+<div class="pro-toggle">
+  <span style="color:#c8b89a;font-size:.9rem">✦ Pro — Best Days (numerology)</span>
+  <button class="toggle" id="proToggle" onclick="togglePro()"></button>
+</div>
+<input type="date" id="birthday" placeholder="Your birthday" style="display:none;margin-bottom:14px"/>
+<button id="btn" onclick="generate()">✦ Reveal My Story</button>
+<div id="out"></div>
+<script>
+let isPro=false;
+function togglePro(){
+  isPro=!isPro;
+  document.getElementById('proToggle').className='toggle'+(isPro?' on':'');
+  document.getElementById('birthday').style.display=isPro?'block':'none';
+}
+async function generate(){
+  const desire=document.getElementById('desire').value.trim();
+  if(!desire)return;
+  const btn=document.getElementById('btn');
+  const out=document.getElementById('out');
+  btn.disabled=true; btn.textContent='Manifesting...';
+  out.innerHTML='<div style="text-align:center;margin:30px"><span class="spinner">✦</span></div>';
+  const birthday=document.getElementById('birthday').value;
+  const proChunk=isPro&&birthday?`, "bestDays": array of 5 objects each with "date" (upcoming date within 30 days), "dayName", "reason" (numerology for birthday ${birthday}), "strength" (1-5)`:'';
+  const prompt=`You are a soulful manifestation guide. The person wants to manifest: "${desire}"\n\nReturn ONLY raw JSON with:\n- "story": 2 paragraphs past tense second person, vivid emotional\n- "affirmations": 7 objects with "day" (Monday-Sunday) and "text"${proChunk}`;
+  try{
+    const res=await fetch('/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
+    const data=await res.json();
+    if(data.error)throw new Error(data.error.message);
+    const raw=data.content.map(b=>b.text||'').join('').trim();
+    const match=raw.match(/\{[\s\S]*\}/);
+    const parsed=JSON.parse(match[0]);
+    let html=`<div class="card"><h2>✦ Your Story — As It Has Already Happened</h2><div class="story">${parsed.story.replace(/\n/g,'<br><br>')}</div></div>`;
+    html+=`<div class="card"><h2>Your 7-Day Affirmations</h2>${parsed.affirmations.map(a=>`<div class="aff"><span class="day">${a.day}</span><span class="aff-text">${a.text}</span></div>`).join('')}</div>`;
+    if(parsed.bestDays)html+=`<div class="card"><h2>✦ Pro · Best Days to Manifest</h2>${parsed.bestDays.map(d=>`<div style="margin-bottom:16px"><strong style="color:#c4a0ff">${d.date}</strong> · ${d.dayName} · Power ${d.strength}/5<br><span style="font-size:.85rem;color:#c8b89a">${d.reason}</span></div>`).join('')}</div>`;
+    out.innerHTML=html;
+  }catch(e){out.innerHTML=`<p class="error">Something shifted — ${e.message}. Please try again.</p>`;}
+  btn.disabled=false; btn.textContent='✦ Reveal My Story';
+}
+</script>
 </body>
 </html>
