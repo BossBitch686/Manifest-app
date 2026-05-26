@@ -45,6 +45,7 @@ app.post("/speak", async (req, res) => {
     });
     if (!response.ok) {
       const err = await response.json();
+      console.log(err);
       return res.status(500).json({ error: JSON.stringify(err) });
     }
     const buf = await response.arrayBuffer();
