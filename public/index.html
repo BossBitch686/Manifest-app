@@ -104,7 +104,6 @@ function togglePro(){
 function closeModal(){
   document.getElementById('upgradeModal').classList.remove('show');
 }
-
 function playStory(){
   if(!storyText) return;
   const playBtn = document.getElementById('playBtn');
@@ -113,7 +112,7 @@ function playStory(){
 
   if(isPlaying){
     window.speechSynthesis.cancel();
-    isPlaying = false;
+    audioEl = null;
     playBtn.textContent = '▶';
     fill.style.width = '0%';
     return;
@@ -128,8 +127,7 @@ function playStory(){
     voice = voices.find(v => /daniel|alex|fred|tom|lee|male/i.test(v.name));
   }
   if(!voice) voice = voices[0];
-
-  const utt = new SpeechSynthesisUtterance(storyText);
+const utt = new SpeechSynthesisUtterance(storyText);
   utt.voice = voice;
   utt.rate = 0.88;
   utt.pitch = gender === 'female' ? 1.1 : 0.9;
@@ -140,6 +138,8 @@ function playStory(){
   };
   window.speechSynthesis.speak(utt);
 }
+  
+
 
 async function generate(){
   const desire = document.getElementById('desire').value.trim();
