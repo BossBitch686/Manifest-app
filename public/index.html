@@ -148,8 +148,8 @@ async function generate(){
   const out = document.getElementById('out');
   btn.disabled = true; btn.textContent = 'Manifesting...';
   out.innerHTML = '<div style="text-align:center;margin:30px"><span class="spinner">✦</span></div>';
-  window.speechSynthesis.cancel();
-  isPlaying = false; storyText = '';
+  
+  storyText = '';
 
   const birthday = document.getElementById('birthday').value;
   const proChunk = isPro && birthday ? `, "bestDays": array of 5 objects each with "date" (upcoming date within 30 days), "dayName", "reason" (numerology for birthday ${birthday}), "strength" (1-5)` : '';
