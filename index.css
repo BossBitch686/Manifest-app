@@ -1,0 +1,48 @@
+:root {
+  --bg: #090c22;
+  --bg-elevated: #11163a;
+  --bg-card: #141a44;
+  --gold: #c9a667;
+  --gold-bright: #e8cd8f;
+  --text: #f3efe4;
+  --text-muted: #9099c4;
+  --border: rgba(201, 166, 103, 0.22);
+  --serif: 'Cormorant Garamond', serif;
+  --sans: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--bg);
+}
+
+body {
+  font-family: var(--sans);
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at 20% -10%, rgba(201, 166, 103, 0.10), transparent 55%),
+    radial-gradient(ellipse at 90% 20%, rgba(120, 140, 220, 0.10), transparent 50%),
+    var(--bg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: var(--sans);
+  cursor: pointer;
+}
+
+button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
